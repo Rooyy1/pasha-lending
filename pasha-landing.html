@@ -1546,12 +1546,6 @@
 
         <form id="leadForm" novalidate>
           <div class="field">
-            <label for="telegramInput">Telegram</label>
-            <input type="text" id="telegramInput" name="telegram" placeholder="@username или номер телефона" required />
-            <div class="field-error" id="telegramError"></div>
-          </div>
-
-          <div class="field">
             <label for="goalInput">Цель</label>
             <textarea id="goalInput" name="goal"
               placeholder="Например: похудеть к лету, набрать массу, разобраться с питанием"></textarea>
@@ -1745,9 +1739,7 @@
 
       // ===== FORM =====
       const form = document.getElementById('leadForm');
-      const telegramInput = document.getElementById('telegramInput');
       const goalInput = document.getElementById('goalInput');
-      const telegramError = document.getElementById('telegramError');
       const goalError = document.getElementById('goalError');
       const submitBtn = document.getElementById('submitBtn');
       const retryBtn = document.getElementById('retryBtn');
@@ -1756,16 +1748,9 @@
 
       function validate() {
         let ok = true;
-        telegramError.textContent = '';
         goalError.textContent = '';
 
-        const telegram = telegramInput.value.trim();
         const goal = goalInput.value.trim();
-
-        if (telegram.length < 2) {
-          telegramError.textContent = 'Укажи Telegram или телефон';
-          ok = false;
-        }
 
         if (goal.length < 3) {
           goalError.textContent = 'Коротко опиши цель';
@@ -1776,9 +1761,8 @@
       }
 
       function sendToTelegram() {
-        const telegram = telegramInput.value.trim();
         const goal = goalInput.value.trim();
-        const message = `Новая заявка с сайта\n\nTelegram: ${telegram}\nЦель: ${goal}`;
+        const message = `Привет! Хочу попасть на бесплатную консультацию\n\n Моя цель: ${goal}`;
         lastMessage = message;
         const url = 'https://t.me/Pavgol_f?text=' + encodeURIComponent(message);
         const win = window.open(url, '_blank', 'noopener');
